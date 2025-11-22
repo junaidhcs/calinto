@@ -3,134 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calinto - Empowering Digital Commerce. Coming Soon.">
     <title>Calinto - Coming Soon</title>
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            background: linear-gradient(135deg, #1e1e2f, #29294d);
-            height: 100vh;
-            color: white;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a3e 50%, #2d2d5f 100%);
+            min-height: 100vh;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
         }
-
+        
+        /* Gradient overlay for depth */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
         .container {
             text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            z-index: 10;
+            animation: fadeIn 1.2s ease-out;
+            padding: 20px;
         }
-
+        
         .logo {
-            font-size: 45px;
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideDown 1s ease-out, glow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+        }
+        
+        .tagline {
+            font-size: clamp(14px, 3vw, 20px);
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+            color: #c7d2fe;
+        }
+        
+        .coming {
+            margin-top: 50px;
+            font-size: clamp(24px, 5vw, 36px);
             font-weight: 600;
             letter-spacing: 3px;
-            margin-bottom: 10px;
-            animation: slideDown 1.5s ease forwards;
+            animation: pulse 2.5s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
         }
-
-        .tagline {
-            font-size: 18px;
-            opacity: 0.8;
-            animation: fadeIn 3s ease-in-out;
-        }
-
-        .coming {
-            margin-top: 40px;
-            font-size: 32px;
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
+        
         .loading {
-            margin-top: 25px;
+            margin-top: 30px;
+            font-size: 40px;
+            letter-spacing: 10px;
         }
-
+        
+        .dots {
+            display: inline-block;
+        }
+        
         .dots span {
-            animation: blink 1.5s infinite;
+            opacity: 0;
+            animation: blink 1.4s infinite;
+            color: #667eea;
         }
-
+        
+        .dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
         .dots span:nth-child(2) {
-            animation-delay: 0.3s;
+            animation-delay: 0.2s;
         }
-
+        
         .dots span:nth-child(3) {
-            animation-delay: 0.6s;
+            animation-delay: 0.4s;
         }
-
-        /* Floating particle animation */
+        
+        /* Enhanced particle styling */
         .particle {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            animation: floatUp 6s infinite linear;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.2) 100%);
+            animation: floatUp 8s infinite ease-in;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
-
+        
+        /* Accessibility - Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .particle {
+                display: none;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo {
+                letter-spacing: 4px;
+            }
+            .coming {
+                margin-top: 35px;
+            }
+        }
+        
+        /* Animations */
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+            0% { 
+                transform: translateY(100vh) scale(0) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-20vh) scale(1) rotate(360deg); 
+                opacity: 0; 
+            }
         }
-
+        
         @keyframes fadeIn {
-            from { opacity: 0 }
-            to { opacity: 1 }
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
+        
         @keyframes slideDown {
-            from { transform: translateY(-40px); opacity: 0 }
-            to { transform: translateY(0); opacity: 1 }
+            from { 
+                transform: translateY(-50px); 
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0); 
+                opacity: 1;
+            }
         }
-
+        
         @keyframes blink {
-            0% { opacity: 0 }
-            100% { opacity: 1 }
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
         }
-
+        
         @keyframes pulse {
-            0%,100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.8));
+            }
         }
     </style>
 </head>
-
 <body>
-
-    <!-- Animated Floating Particles -->
-    <script>
-        for (let i = 0; i < 40; i++) {
-            let particle = document.createElement("div");
-            particle.className = "particle";
-            particle.style.left = Math.random() * 100 + "vw";
-            particle.style.animationDelay = Math.random() * 5 + "s";
-            particle.style.width = particle.style.height = (Math.random() * 8 + 4) + "px";
-            document.body.appendChild(particle);
-        }
-    </script>
-
     <div class="container">
-        <div class="logo">CALINTO</div>
-        <div class="tagline">Empowering Digital Commerce</div>
-
-        <div class="coming">Coming Soon</div>
-
-        <div class="loading">
+        <h1 class="logo" role="banner">CALINTO</h1>
+        <p class="tagline">Empowering Digital Commerce</p>
+        <div class="coming" role="status" aria-live="polite">Coming Soon</div>
+        <div class="loading" aria-label="Loading">
             <div class="dots">
                 <span>.</span><span>.</span><span>.</span>
             </div>
         </div>
     </div>
 
+    <script>
+        // Optimized particle generation with better performance
+        (function() {
+            const particleCount = window.innerWidth < 768 ? 25 : 40;
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.setAttribute('aria-hidden', 'true');
+                
+                // Randomize properties
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                
+                const size = Math.random() * 6 + 3;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                fragment.appendChild(particle);
+            }
+            
+            document.body.appendChild(fragment);
+        })();
+    </script>
 </body>
 </html>
